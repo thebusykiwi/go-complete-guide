@@ -4,27 +4,31 @@ import "fmt"
 
 func main() {
 	var accountBalance float64 = 1000
-	
+
 	fmt.Println("Welcome to Go Bank!")
-	fmt.Println("What do you want to do?")
-
-	fmt.Println("1. Check Balance")
-	fmt.Println("2. Deposit amount")
-	fmt.Println("3. Withdraw amount")
-	fmt.Println("4. Exit")
-
-	var choice int
-	fmt.Print("Your choice: ")
-	fmt.Scan(&choice)
-
-	if choice == 1 {
-		checkBalance(accountBalance)
-	} else if choice == 2 {
-		accountBalance = depositAmount(accountBalance)
-	} else if choice == 3 {
-		accountBalance = withdrawAmount(accountBalance)
-	} else {
-		printToConsole("Thank you for choosing us!\n")
+	
+	for {
+		fmt.Println("What do you want to do?")
+	
+		fmt.Println("1. Check Balance")
+		fmt.Println("2. Deposit amount")
+		fmt.Println("3. Withdraw amount")
+		fmt.Println("4. Exit")
+	
+		var choice int
+		fmt.Print("Your choice: ")
+		fmt.Scan(&choice)
+	
+		if choice == 1 {
+			checkBalance(accountBalance)
+		} else if choice == 2 {
+			accountBalance = depositAmount(accountBalance)
+		} else if choice == 3 {
+			accountBalance = withdrawAmount(accountBalance)
+		} else {
+			printToConsole("Thank you for choosing us!\n")
+			return
+		}
 	}
 }
 
