@@ -6,32 +6,32 @@ func main() {
 	var accountBalance float64 = 1000
 
 	fmt.Println("Welcome to Go Bank!")
-	
+
 	for {
 		fmt.Println("What do you want to do?")
-	
+
 		fmt.Println("1. Check Balance")
 		fmt.Println("2. Deposit amount")
 		fmt.Println("3. Withdraw amount")
 		fmt.Println("4. Exit")
-	
+
 		var choice int
 		fmt.Print("Your choice: ")
 		fmt.Scan(&choice)
-	
-		if choice == 1 {
+
+		switch choice {
+		case 1:
 			checkBalance(accountBalance)
-		} else if choice == 2 {
+		case 2:
 			accountBalance = depositAmount(accountBalance)
-		} else if choice == 3 {
+		case 3:
 			accountBalance = withdrawAmount(accountBalance)
-		} else {
+		default:
 			printToConsole("Thank you for choosing us!\n")
 			return
 		}
 	}
 }
-
 
 func checkBalance(accountBalance float64) {
 	fmt.Println("Your current account balance:", accountBalance)
@@ -50,13 +50,13 @@ func depositAmount(accountBalance float64) float64 {
 }
 
 func withdrawAmount(accountBalance float64) float64 {
-	userWithdraw := getUserInput("Enter your amount: ") 
+	userWithdraw := getUserInput("Enter your amount: ")
 
 	if userWithdraw <= 0 {
 		printToConsole("Invalid amount. Must be greater than 0.\n")
 		return accountBalance
-	} 
-		
+	}
+
 	if userWithdraw > accountBalance {
 		printToConsole("Insufficient funds\n")
 		return accountBalance
