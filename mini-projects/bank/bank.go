@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 func main() {
+	var accountBalance float64 = 1000
+	
 	fmt.Println("Welcome to Go Bank!")
 	fmt.Println("What do you want to do?")
 
@@ -15,5 +17,23 @@ func main() {
 	fmt.Print("Your choice: ")
 	fmt.Scan(&choice)
 
-	fmt.Println("Your choice:", choice)
+	if choice == 1 {
+		checkBalance(accountBalance)
+	} 
+}
+
+
+func checkBalance(accountBalance float64) {
+	fmt.Println("Your current account balance: ", accountBalance)
+}
+
+func getUserInput(text string) float64 {
+	var userInput float64
+	printToConsole(text)
+	fmt.Scan(&userInput)
+	return userInput
+}
+
+func printToConsole(text string) {
+	fmt.Print(text)
 }
