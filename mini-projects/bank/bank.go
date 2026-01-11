@@ -20,9 +20,9 @@ func main() {
 	if choice == 1 {
 		checkBalance(accountBalance)
 	} else if choice == 2 {
-		depositAmount(accountBalance)
+		accountBalance = depositAmount(accountBalance)
 	} else if choice == 3 {
-		withdrawAmount(accountBalance)
+		accountBalance = withdrawAmount(accountBalance)
 	} else {
 		printToConsole("Thank you for choosing us!\n")
 	}
@@ -33,23 +33,36 @@ func checkBalance(accountBalance float64) {
 	fmt.Println("Your current account balance:", accountBalance)
 }
 
-func depositAmount(accountBalance float64) {
+func depositAmount(accountBalance float64) float64 {
 	userDeposit := getUserInput("Enter your amount: ")
+	if userDeposit <= 0 {
+		printToConsole("Invalid amount. Must be greater than 0.\n")
+		return accountBalance
+	}
 	accountBalance += userDeposit
 	printToConsole("Amount added successfully\n")
 	checkBalance(accountBalance)
+	return accountBalance
 }
 
-func withdrawAmount(accountBalance float64) {
-	userWithdraw := getUserInput("Enter your amount: ")
+func withdrawAmount(accountBalance float64) float64 {
+	userWithdraw := getUserInput("Enter your amount: ") 
+
+	if userWithdraw <= 0 {
+		printToConsole("Invalid amount. Must be greater than 0.\n")
+		return accountBalance
+	} 
+		
 	if userWithdraw > accountBalance {
 		printToConsole("Insufficient funds\n")
-		checkBalance(accountBalance)
-	} else {
-		accountBalance -= userWithdraw
-		printToConsole("Amount withdrawn successfully\n")
-		checkBalance(accountBalance)
+		return accountBalance
 	}
+
+	accountBalance -= userWithdraw
+	printToConsole("Amount withdrawn successfully\n")
+	checkBalance(accountBalance)
+
+	return accountBalance
 }
 
 func getUserInput(text string) float64 {
