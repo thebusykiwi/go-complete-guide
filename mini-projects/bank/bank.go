@@ -4,14 +4,13 @@ import "fmt"
 
 func main() {
 	var accountBalance float64 = 1000
-	var money float64
 	
 	fmt.Println("Welcome to Go Bank!")
 	fmt.Println("What do you want to do?")
 
 	fmt.Println("1. Check Balance")
-	fmt.Println("2. Deposit Money")
-	fmt.Println("3. Withdraw Money")
+	fmt.Println("2. Deposit amount")
+	fmt.Println("3. Withdraw amount")
 	fmt.Println("4. Exit")
 
 	var choice int
@@ -21,20 +20,36 @@ func main() {
 	if choice == 1 {
 		checkBalance(accountBalance)
 	} else if choice == 2 {
-		depositMoney(accountBalance, money)
+		depositAmount(accountBalance)
+	} else if choice == 3 {
+		withdrawAmount(accountBalance)
+	} else {
+		printToConsole("Thank you for choosing us!\n")
 	}
 }
 
 
 func checkBalance(accountBalance float64) {
-	fmt.Println("Your current account balance: ", accountBalance)
+	fmt.Println("Your current account balance:", accountBalance)
 }
 
-func depositMoney(accountBalance,money float64) {
+func depositAmount(accountBalance float64) {
 	userDeposit := getUserInput("Enter your amount: ")
 	accountBalance += userDeposit
 	printToConsole("Amount added successfully\n")
 	checkBalance(accountBalance)
+}
+
+func withdrawAmount(accountBalance float64) {
+	userWithdraw := getUserInput("Enter your amount: ")
+	if userWithdraw > accountBalance {
+		printToConsole("Insufficient funds\n")
+		checkBalance(accountBalance)
+	} else {
+		accountBalance -= userWithdraw
+		printToConsole("Amount withdrawn successfully\n")
+		checkBalance(accountBalance)
+	}
 }
 
 func getUserInput(text string) float64 {
