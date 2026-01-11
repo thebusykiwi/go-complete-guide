@@ -4,6 +4,7 @@ import "fmt"
 
 func main() {
 	var accountBalance float64 = 1000
+	var money float64
 	
 	fmt.Println("Welcome to Go Bank!")
 	fmt.Println("What do you want to do?")
@@ -19,12 +20,21 @@ func main() {
 
 	if choice == 1 {
 		checkBalance(accountBalance)
-	} 
+	} else if choice == 2 {
+		depositMoney(accountBalance, money)
+	}
 }
 
 
 func checkBalance(accountBalance float64) {
 	fmt.Println("Your current account balance: ", accountBalance)
+}
+
+func depositMoney(accountBalance,money float64) {
+	userDeposit := getUserInput("Enter your amount: ")
+	accountBalance += userDeposit
+	printToConsole("Amount added successfully\n")
+	checkBalance(accountBalance)
 }
 
 func getUserInput(text string) float64 {
